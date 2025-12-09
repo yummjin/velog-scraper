@@ -1,3 +1,4 @@
+import { cleanElement } from "@/src/utils/cleanElement";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
@@ -14,36 +15,6 @@ export async function GET(
     const $ = cheerio.load(html.data);
 
     const title = $("title").text();
-
-    const cleanElement = ($element: ReturnType<typeof $>) => {
-      $element
-        .find(
-          "script, style, nav, header, footer, aside, button, iframe, form, a"
-        )
-        .remove();
-      $element
-        .find(
-          "[class*='nav'], [class*='user-logo'], [class*='sc-TBWPX dXONqK sc-brSvTw cgYvDI'], [class*='menu'], [class*='sidebar'], [class*='header'], [class*='footer']"
-        )
-        .remove();
-      $element
-        .find(
-          "[class*='login'], [class*='signin'], [class*='signup'], [class*='auth']"
-        )
-        .remove();
-      $element
-        .find(
-          "[class*='ad'], [class*='banner'], [class*='popup'], [class*='modal']"
-        )
-        .remove();
-      $element
-        .find(
-          "[class*='comment'], [class*='tag'], [class*='author'], [class*='profile'], [class*='share'], [class*='follow']"
-        )
-        .remove();
-      $element.find("[class*='meta'], [class*='info']").remove();
-      return $element.text().trim().replace(/\s+/g, " ");
-    };
 
     let bodyContent = "";
 
@@ -72,10 +43,17 @@ export async function GET(
       body: bodyContent,
       image: $("img").attr("src"),
     };
-    return new Response(JSON.stringify(response));
+    return new Response(JSON.stringify(response), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     return new Response(JSON.stringify({ error: (error as Error).message }), {
       status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }
 }
