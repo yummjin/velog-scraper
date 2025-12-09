@@ -1,7 +1,11 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
+import { NextRequest } from "next/server";
 
-export async function GET(context: { params: Promise<{ path: string[] }> }) {
+export async function GET(
+  request: NextRequest,
+  context: { params: Promise<{ path: string[] }> }
+) {
   const { path } = await context.params;
   const url = path.join("/");
 
