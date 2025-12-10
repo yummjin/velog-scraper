@@ -4,12 +4,18 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ path: string[] }> }
-) {
-  const { path } = await context.params;
-  const url = path.join("/");
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const url = searchParams.get("url");
+
+  if (!url) {
+    return new Response(JSON.stringify({ error: "URL parameter is required" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
 
   try {
     const html = await axios.get(url);
@@ -66,3 +72,4 @@ export async function GET(
     });
   }
 }
+

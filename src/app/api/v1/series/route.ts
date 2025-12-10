@@ -5,16 +5,25 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  context: { params: Promise<{ path: string[] }> }
-) {
-  const { path } = await context.params;
-  const url = path.join("/");
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const url = searchParams.get("url");
+
+  if (!url) {
+    return new Response(JSON.stringify({ error: "URL parameter is required" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
 
   if (!url.includes("velog.io") || !url.includes("series")) {
     return new Response(JSON.stringify({ error: "Not a Velog Series URL" }), {
       status: 400,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }
 
@@ -52,10 +61,18 @@ export async function GET(
       contents: bodyContent,
     };
 
-    return new Response(JSON.stringify(response));
+    return new Response(JSON.stringify(response), {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     return new Response(JSON.stringify({ error: (error as Error).message }), {
       status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }
 }
+
