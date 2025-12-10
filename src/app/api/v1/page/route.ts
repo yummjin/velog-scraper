@@ -4,21 +4,38 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const url = searchParams.get("url");
 
   if (!url) {
-    return new Response(JSON.stringify({ error: "URL parameter is required" }), {
-      status: 400,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    return new Response(
+      JSON.stringify({ error: "URL parameter is required" }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    );
   }
 
   try {
-    const html = await axios.get(url);
+    const html = await axios.get(decodeURIComponent(url));
     const $ = cheerio.load(html.data);
 
     const title = $("title").text();
@@ -61,6 +78,7 @@ export async function GET(request: NextRequest) {
     return new Response(JSON.stringify(response), {
       headers: {
         "Content-Type": "application/json",
+        ...corsHeaders,
       },
     });
   } catch (error) {
@@ -68,8 +86,8 @@ export async function GET(request: NextRequest) {
       status: 500,
       headers: {
         "Content-Type": "application/json",
+        ...corsHeaders,
       },
     });
   }
 }
-
