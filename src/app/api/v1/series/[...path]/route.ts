@@ -1,3 +1,5 @@
+import { Post } from "@/src/app/types/post";
+import { Series } from "@/src/app/types/series";
 import { cleanSeriesElement } from "@/src/utils/cleanElement";
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -22,7 +24,7 @@ export async function GET(
 
     const title = $("title").text().split(" | ")[1];
 
-    let bodyContent: { title: string; body: string; date: string }[] = [];
+    let bodyContent: Post[] = [];
 
     if ($("section").length > 0) {
       const $section = $("section").clone();
@@ -34,6 +36,10 @@ export async function GET(
             title: $(element).text(),
             body: cleanSeriesElement($(element).next()).slice(0, 100) + " ...",
             date: $(element).next().find("[class*='date']").text(),
+            href:
+              "https://velog.io" + $(element).next().find("a").attr("href") ||
+              "",
+            image: $(element).next().find("img").attr("src") || "",
           };
         })
         .get();
@@ -41,10 +47,11 @@ export async function GET(
       bodyContent = [];
     }
 
-    const response = {
+    const response: Series = {
       title,
       contents: bodyContent,
     };
+
     return new Response(JSON.stringify(response));
   } catch (error) {
     return new Response(JSON.stringify({ error: (error as Error).message }), {

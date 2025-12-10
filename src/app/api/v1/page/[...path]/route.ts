@@ -1,3 +1,4 @@
+import { Post } from "@/src/app/types/post";
 import { cleanElement } from "@/src/utils/cleanElement";
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -38,11 +39,19 @@ export async function GET(
       bodyContent = cleanElement($body);
     }
 
-    const response = {
+    const response: Post = {
       title,
       body: bodyContent,
-      image: $("img").attr("src"),
+      image: $("img").attr("src") || "",
+      date:
+        $("[class*='information']")
+          .find("[class*='username']")
+          .next()
+          .next()
+          .text() || "",
+      href: url,
     };
+
     return new Response(JSON.stringify(response), {
       headers: {
         "Content-Type": "application/json",
