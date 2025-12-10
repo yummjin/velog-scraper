@@ -1,9 +1,14 @@
 "use client";
 
-import ResultSection from "@/src/components/ResultSection";
-import { fetchSingle, type Post } from "../../actions/fetchSingle";
 import { FormEvent, useState } from "react";
-import { fetchSeries, type Series } from "../../actions/fetchSeries";
+
+import ResultSection from "@/src/components/ResultSection";
+import { fetchSingle } from "@/src/actions/fetchSingle";
+import { fetchSeries } from "@/src/actions/fetchSeries";
+
+import type { Post } from "@/src/app/types/post";
+import type { Series } from "@/src/app/types/series";
+
 export default function DocumentPage() {
   const [result, setResult] = useState<Post | null>(null);
   const [seriesResult, setSeriesResult] = useState<Series | null>(null);
