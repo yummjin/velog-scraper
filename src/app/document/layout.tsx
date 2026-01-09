@@ -45,6 +45,16 @@ export default function DocumentLayout({
             >
               시리즈 스크래핑
             </Link>
+            <Link
+              href="/document/tag"
+              className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                pathname === "/document/tag"
+                  ? "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+                  : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+              }`}
+            >
+              태그 스크래핑
+            </Link>
           </nav>
         </div>
       </aside>
