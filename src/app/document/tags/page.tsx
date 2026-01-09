@@ -17,12 +17,12 @@ export default function TagPage() {
       </p>
 
       <CodeBlock
-        code="GET /api/v1/tag"
+        code="GET /api/v1/tags"
         variant="light"
         className="mb-6 font-mono text-sm"
       >
         <span className="text-blue-600 dark:text-blue-400">GET</span>{" "}
-        <span className="text-zinc-700 dark:text-zinc-300">/api/v1/tag</span>
+        <span className="text-zinc-700 dark:text-zinc-300">/api/v1/tags</span>
       </CodeBlock>
 
       <section className="mb-16">
@@ -48,12 +48,12 @@ export default function TagPage() {
               label: "cURL",
               code: `curl -L \\
   -H "Accept: application/json" \\
-  "${baseUrl}/api/v1/tag?url=https://velog.io/@username"`,
+  "${baseUrl}/api/v1/tags?url=https://velog.io/@username"`,
               content: (
                 <pre className="text-zinc-100 text-sm font-mono">
                   <code>{`curl -L \\
   -H "Accept: application/json" \\
-  "${baseUrl}/api/v1/tag?url=https://velog.io/@username"`}</code>
+  "${baseUrl}/api/v1/tags?url=https://velog.io/@username"`}</code>
                 </pre>
               ),
             },
@@ -61,7 +61,7 @@ export default function TagPage() {
               value: "javascript",
               label: "JavaScript",
               code: `const response = await fetch(
-  \`${baseUrl}/api/v1/tag?url=\${encodeURIComponent('https://velog.io/@username')}\`,
+  \`${baseUrl}/api/v1/tags?url=\${encodeURIComponent('https://velog.io/@username')}\`,
   {
     headers: {
       'Accept': 'application/json',
@@ -73,7 +73,7 @@ const data = await response.json();`,
               content: (
                 <pre className="text-zinc-100 text-sm font-mono">
                   <code>{`const response = await fetch(
-  \`${baseUrl}/api/v1/tag?url=\${encodeURIComponent('https://velog.io/@username')}\`,
+  \`${baseUrl}/api/v1/tags?url=\${encodeURIComponent('https://velog.io/@username')}\`,
   {
     headers: {
       'Accept': 'application/json',
@@ -314,3 +314,4 @@ Content-Type: application/json
     </div>
   );
 }
+
