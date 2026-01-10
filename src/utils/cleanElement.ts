@@ -6,22 +6,22 @@ export const cleanElement = ($element: ReturnType<cheerio.CheerioAPI>) => {
     .remove();
   $element
     .find(
-      "[class*='nav'], [class*='user-logo'], [class*='sc-TBWPX dXONqK sc-brSvTw cgYvDI'], [class*='menu'], [class*='sidebar'], [class*='header'], [class*='footer']"
+      "[class*='nav'], [class*='user-logo'], [class*='sc-TBWPX dXONqK sc-brSvTw cgYvDI'], [class*='menu'], [class*='sidebar'], [class*='header'], [class*='footer']",
     )
     .remove();
   $element
     .find(
-      "[class*='login'], [class*='signin'], [class*='signup'], [class*='auth']"
+      "[class*='login'], [class*='signin'], [class*='signup'], [class*='auth']",
     )
     .remove();
   $element
     .find(
-      "[class*='ad'], [class*='banner'], [class*='popup'], [class*='modal']"
+      "[class*='ad'], [class*='banner'], [class*='popup'], [class*='modal']",
     )
     .remove();
   $element
     .find(
-      "[class*='comment'], [class*='tag'], [class*='author'], [class*='profile'], [class*='share'], [class*='follow']"
+      "[class*='comment'], [class*='tag'], [class*='author'], [class*='profile'], [class*='share'], [class*='follow']",
     )
     .remove();
   $element.find("[class*='meta'], [class*='info']").remove();
@@ -29,7 +29,7 @@ export const cleanElement = ($element: ReturnType<cheerio.CheerioAPI>) => {
 };
 
 export const cleanSeriesElement = (
-  $element: ReturnType<cheerio.CheerioAPI>
+  $element: ReturnType<cheerio.CheerioAPI>,
 ) => {
   return $element.text().trim().replace(/\s+/g, " ");
 };

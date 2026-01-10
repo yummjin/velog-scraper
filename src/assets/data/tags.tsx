@@ -56,7 +56,7 @@ export const tagsData: TagsData = {
   -H "Accept: application/json" \\
   "${baseUrl}/api/v1/tags?userId=username"`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`curl -L \\
   -H "Accept: application/json" \\
   "${baseUrl}/api/v1/tags?userId=username"`}</code>
@@ -77,7 +77,7 @@ export const tagsData: TagsData = {
 
 const data = await response.json();`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`const response = await fetch(
   \`${baseUrl}/api/v1/tags?userId=username\`,
   {
@@ -120,7 +120,7 @@ const data = await response.json();`}</code>
   ]
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`{
   "tags": [
     {
@@ -146,7 +146,7 @@ type TagResponse = {
   tags: Tag[];
 };`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`type Tag = {
   id: string;
   name: string;
@@ -186,7 +186,7 @@ type TagResponse = {
   ]
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`Status: 200
 
 {
@@ -242,7 +242,7 @@ Content-Type: application/json
   ]
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`Status: 200
 Content-Type: application/json
 

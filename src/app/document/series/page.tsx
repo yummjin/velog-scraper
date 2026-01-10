@@ -7,11 +7,11 @@ export default function SeriesPage() {
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   return (
-    <div className="max-w-5xl mx-auto px-8 py-8">
-      <h1 className="text-3xl font-bold text-black dark:text-zinc-50 mb-8">
+    <div className="mx-auto max-w-5xl px-8 py-8">
+      <h1 className="mb-8 text-3xl font-bold text-black dark:text-zinc-50">
         {seriesData.title}
       </h1>
-      <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+      <p className="mb-6 text-zinc-600 dark:text-zinc-400">
         {seriesData.description}
       </p>
 

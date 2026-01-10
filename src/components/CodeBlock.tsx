@@ -34,12 +34,12 @@ export default function CodeBlock({
 
   return (
     <div
-      className={`${baseClasses} rounded-lg p-4 overflow-x-auto relative group ${className}`}
+      className={`${baseClasses} group relative overflow-x-auto rounded-lg p-4 ${className}`}
     >
       {children}
       <button
         onClick={copyToClipboard}
-        className="absolute top-2 right-2 p-2 text-zinc-400 hover:text-zinc-200 dark:hover:text-zinc-300 hover:bg-zinc-800 dark:hover:bg-zinc-700 rounded transition-colors"
+        className="absolute top-2 right-2 rounded p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-zinc-300"
         title="복사하기"
       >
         {copied ? (
@@ -77,4 +77,3 @@ export default function CodeBlock({
     </div>
   );
 }
-

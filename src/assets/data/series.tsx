@@ -65,7 +65,7 @@ export const seriesData: SeriesData = {
   -H "Accept: application/json" \\
   "${baseUrl}/api/v1/series?userId=username&seriesTitle=시리즈 제목"`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`curl -L \\
   -H "Accept: application/json" \\
   "${baseUrl}/api/v1/series?userId=username&seriesTitle=시리즈 제목"`}</code>
@@ -86,7 +86,7 @@ export const seriesData: SeriesData = {
 
 const data = await response.json();`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`const response = await fetch(
   \`${baseUrl}/api/v1/series?userId=username&seriesTitle=시리즈 제목\`,
   {
@@ -132,7 +132,7 @@ const data = await response.json();`}</code>
   ]
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`{
   "title": string,
   "contents": [
@@ -164,7 +164,7 @@ type Series = {
   contents: Post[];
 };`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`type Post = {
   title: string;
   body: string;
@@ -207,7 +207,7 @@ type Series = {
   ]
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`Status: 200
 
 {
@@ -265,7 +265,7 @@ Content-Type: application/json
   ]
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`Status: 200
 Content-Type: application/json
 

@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
           "Content-Type": "application/json",
           ...corsHeaders,
         },
-      }
+      },
     );
   }
 
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
       $(".content, .post-content, .article-content, .entry-content").length > 0
     ) {
       const $content = $(
-        ".content, .post-content, .article-content, .entry-content"
+        ".content, .post-content, .article-content, .entry-content",
       )
         .first()
         .clone();

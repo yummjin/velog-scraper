@@ -56,7 +56,7 @@ export const pageData: PageData = {
   -H "Accept: application/json" \\
   "${baseUrl}/api/v1/page?url=https://velog.io/@username/post-title"`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`curl -L \\
   -H "Accept: application/json" \\
   "${baseUrl}/api/v1/page?url=https://velog.io/@username/post-title"`}</code>
@@ -77,7 +77,7 @@ export const pageData: PageData = {
 
 const data = await response.json();`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`const response = await fetch(
   \`${baseUrl}/api/v1/page?url=\${encodeURIComponent('https://velog.io/@username/post-title')}\`,
   {
@@ -118,7 +118,7 @@ const data = await response.json();`}</code>
   "href": string
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`{
   "title": string,
   "body": string,
@@ -140,7 +140,7 @@ const data = await response.json();`}</code>
   href: string;
 };`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`type Post = {
   title: string;
   body: string;
@@ -166,7 +166,7 @@ const data = await response.json();`}</code>
   "href": "https://velog.io/@username/post-title"
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`Status: 200
 
 {
@@ -193,7 +193,7 @@ Content-Type: application/json
   "href": "https://velog.io/@developer/react-hooks-guide"
 }`,
       content: (
-        <pre className="text-zinc-100 text-sm font-mono">
+        <pre className="font-mono text-sm text-zinc-100">
           <code>{`Status: 200
 Content-Type: application/json
 

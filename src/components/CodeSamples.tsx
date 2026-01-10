@@ -23,14 +23,14 @@ export default function CodeSamples({
   defaultTab,
 }: CodeSamplesProps) {
   const [activeTab, setActiveTab] = useState<string>(
-    defaultTab || samples[0]?.value || ""
+    defaultTab || samples[0]?.value || "",
   );
 
   const activeSample = samples.find((sample) => sample.value === activeTab);
 
   return (
     <>
-      <h3 className="text-xl font-semibold text-black dark:text-zinc-50 mb-4">
+      <h3 className="mb-4 text-xl font-semibold text-black dark:text-zinc-50">
         {title}
       </h3>
       <div className="mb-6">
@@ -51,4 +51,3 @@ export default function CodeSamples({
     </>
   );
 }
-

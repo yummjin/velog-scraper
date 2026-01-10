@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
           "Content-Type": "application/json",
           ...corsHeaders,
         },
-      }
+      },
     );
   }
 
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
           "Content-Type": "application/json",
           ...corsHeaders,
         },
-      }
+      },
     );
   }
 
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const html = await axios.get(
-      `https://velog.io/@${userId}/series/${seriesUrl}`
+      `https://velog.io/@${userId}/series/${seriesUrl}`,
     );
     const $ = cheerio.load(html.data);
 

@@ -12,15 +12,15 @@ export default function TabNavigation<T extends string>({
   onTabChange,
 }: TabNavigationProps<T>) {
   return (
-    <div className="flex gap-2 mb-2 border-b border-zinc-300 dark:border-zinc-700">
+    <div className="mb-2 flex gap-2 border-b border-zinc-300 dark:border-zinc-700">
       {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onTabChange(tab.value)}
           className={`px-4 py-2 font-medium ${
             activeTab === tab.value
-              ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+              ? "border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400"
+              : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
           }`}
         >
           {tab.label}
@@ -29,4 +29,3 @@ export default function TabNavigation<T extends string>({
     </div>
   );
 }
-

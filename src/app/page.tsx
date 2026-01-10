@@ -30,10 +30,10 @@ function HeroSection() {
           </span>
           API 서비스 운영 중
         </div>
-        <h1 className="mb-6 text-5xl font-bold tracking-tight text-black dark:text-zinc-50 sm:text-6xl md:text-7xl">
+        <h1 className="mb-6 text-5xl font-bold tracking-tight text-black sm:text-6xl md:text-7xl dark:text-zinc-50">
           Velog Scraper
         </h1>
-        <p className="mb-4 text-xl leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-2xl">
+        <p className="mb-4 text-xl leading-relaxed text-zinc-600 sm:text-2xl dark:text-zinc-400">
           Velog 게시글을 간편하게 JSON으로 추출하세요
         </p>
         <p className="mx-auto mb-12 max-w-2xl text-lg text-zinc-500 dark:text-zinc-500">
@@ -90,7 +90,7 @@ interface FeatureCardProps {
 function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
     <div className="rounded-xl border border-zinc-200 bg-white p-8 shadow-sm transition-shadow hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg [&>div]:h-full [&>div]:w-full [&>div]:flex [&>div]:items-center [&>div]:justify-center">
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg [&>div]:flex [&>div]:h-full [&>div]:w-full [&>div]:items-center [&>div]:justify-center">
         {icon}
       </div>
       <h3 className="mb-2 text-xl font-semibold text-black dark:text-zinc-50">
@@ -118,7 +118,7 @@ function FeaturesSection({ title, subtitle, features }: FeaturesSectionProps) {
     <section className="px-6 py-20 sm:px-12">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-black dark:text-zinc-50 sm:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-black sm:text-4xl dark:text-zinc-50">
             {title}
           </h2>
           <p className="text-lg text-zinc-600 dark:text-zinc-400">{subtitle}</p>
@@ -179,10 +179,10 @@ function CodeExamplesSection({
   examples,
 }: CodeExamplesSectionProps) {
   return (
-    <section className="border-t border-zinc-200 bg-zinc-50 px-6 py-20 dark:border-zinc-800 dark:bg-zinc-950 sm:px-12">
+    <section className="border-t border-zinc-200 bg-zinc-50 px-6 py-20 sm:px-12 dark:border-zinc-800 dark:bg-zinc-950">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-black dark:text-zinc-50 sm:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold text-black sm:text-4xl dark:text-zinc-50">
             {title}
           </h2>
           <p className="text-lg text-zinc-600 dark:text-zinc-400">{subtitle}</p>
