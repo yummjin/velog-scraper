@@ -1,5 +1,5 @@
-import { Post } from "@/src/app/types/post";
-import { cleanElement } from "@/src/utils/cleanElement";
+import type { Post } from "@/app/types";
+import { cleanElement } from "@/utils/cleanElement";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
