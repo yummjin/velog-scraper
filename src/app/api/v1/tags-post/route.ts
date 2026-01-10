@@ -3,7 +3,10 @@ import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
 
 // Vercel 환경에서는 puppeteer-core, 로컬에서는 puppeteer 사용
-const isVercel = process.env.VERCEL === "1" || process.env.VERCEL_ENV;
+const isVercel =
+  process.env.VERCEL === "1" ||
+  process.env.VERCEL_ENV !== undefined ||
+  process.env.AWS_LAMBDA_FUNCTION_NAME !== undefined;
 
 // Conditional import를 위해 동적으로 로드
 const getPuppeteer = () => {
@@ -60,11 +63,11 @@ export async function GET(request: NextRequest) {
   try {
     const puppeteer = getPuppeteer();
     let browser;
-    
+
     if (isVercel) {
       // Vercel 환경: puppeteer-core + chromium 사용
       const chromium = require("@sparticuz/chromium");
-      
+
       browser = await puppeteer.launch({
         args: [
           ...chromium.args,
@@ -78,6 +81,7 @@ export async function GET(request: NextRequest) {
         },
         executablePath: await chromium.executablePath(),
         headless: chromium.headless ?? true,
+        ignoreHTTPSErrors: true,
       });
     } else {
       // 로컬 개발 환경: 일반 puppeteer 사용
