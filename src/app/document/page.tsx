@@ -7,7 +7,7 @@ export default function DocumentPage() {
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   return (
-    <div className="mx-auto max-w-5xl px-8 py-8">
+    <div className="p-8">
       <h1 className="mb-8 text-3xl font-bold text-black dark:text-zinc-50">
         {pageData.title}
       </h1>
