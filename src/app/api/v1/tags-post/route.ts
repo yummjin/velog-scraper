@@ -1,7 +1,17 @@
 import type { Post } from "@/types";
 import * as cheerio from "cheerio";
-import puppeteer from "puppeteer";
 import { NextRequest } from "next/server";
+
+// Vercel 환경에서는 puppeteer-core, 로컬에서는 puppeteer 사용
+const isVercel = process.env.VERCEL === "1" || process.env.VERCEL_ENV;
+
+// Conditional import를 위해 동적으로 로드
+const getPuppeteer = () => {
+  if (isVercel) {
+    return require("puppeteer-core");
+  }
+  return require("puppeteer");
+};
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -48,10 +58,34 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const puppeteer = getPuppeteer();
+    let browser;
+    
+    if (isVercel) {
+      // Vercel 환경: puppeteer-core + chromium 사용
+      const chromium = require("@sparticuz/chromium");
+      
+      browser = await puppeteer.launch({
+        args: [
+          ...chromium.args,
+          "--hide-scrollbars",
+          "--disable-web-security",
+          "--disable-features=IsolateOrigins,site-per-process",
+        ],
+        defaultViewport: chromium.defaultViewport || {
+          width: 1920,
+          height: 1080,
+        },
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless ?? true,
+      });
+    } else {
+      // 로컬 개발 환경: 일반 puppeteer 사용
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      });
+    }
 
     const page = await browser.newPage();
 
@@ -60,7 +94,7 @@ export async function GET(request: NextRequest) {
     await page.goto(postsUrl, { waitUntil: "networkidle2" });
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const navigationSuccess = await page.evaluate((tagName) => {
+    const navigationSuccess = await page.evaluate((tagName: string) => {
       try {
         const url = new URL(window.location.href);
         url.searchParams.set("tag", tagName);
