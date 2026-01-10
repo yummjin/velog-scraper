@@ -21,6 +21,7 @@ export async function OPTIONS() {
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const userId = searchParams.get("userId");
+  const seriesTitle = searchParams.get("seriesTitle");
 
   if (!userId) {
     return new Response(
@@ -35,8 +36,25 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  if (!seriesTitle) {
+    return new Response(
+      JSON.stringify({ error: "seriesTitle parameter is required" }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    );
+  }
+
+  const seriesUrl = seriesTitle.replace(/ /g, "-");
+
   try {
-    const html = await axios.get(`https://velog.io/@${userId}/series`);
+    const html = await axios.get(
+      `https://velog.io/@${userId}/series/${seriesUrl}`
+    );
     const $ = cheerio.load(html.data);
 
     const title = $("title").text().split(" | ")[1];
