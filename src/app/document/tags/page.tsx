@@ -29,12 +29,11 @@ export default function TagPage() {
         <Parameters
           parameters={[
             {
-              name: "url",
+              name: "userId",
               type: "string",
               description: (
                 <>
-                  <strong>Required.</strong> 스크래핑할 Velog 사용자 페이지의
-                  URL
+                  <strong>Required.</strong> 스크래핑할 Velog 사용자 ID
                 </>
               ),
             },
@@ -48,12 +47,12 @@ export default function TagPage() {
               label: "cURL",
               code: `curl -L \\
   -H "Accept: application/json" \\
-  "${baseUrl}/api/v1/tags?url=https://velog.io/@username"`,
+  "${baseUrl}/api/v1/tags?userId=username"`,
               content: (
                 <pre className="text-zinc-100 text-sm font-mono">
                   <code>{`curl -L \\
   -H "Accept: application/json" \\
-  "${baseUrl}/api/v1/tags?url=https://velog.io/@username"`}</code>
+  "${baseUrl}/api/v1/tags?userId=username"`}</code>
                 </pre>
               ),
             },
@@ -61,7 +60,7 @@ export default function TagPage() {
               value: "javascript",
               label: "JavaScript",
               code: `const response = await fetch(
-  \`${baseUrl}/api/v1/tags?url=\${encodeURIComponent('https://velog.io/@username')}\`,
+  \`${baseUrl}/api/v1/tags?userId=username\`,
   {
     headers: {
       'Accept': 'application/json',
@@ -73,7 +72,7 @@ const data = await response.json();`,
               content: (
                 <pre className="text-zinc-100 text-sm font-mono">
                   <code>{`const response = await fetch(
-  \`${baseUrl}/api/v1/tags?url=\${encodeURIComponent('https://velog.io/@username')}\`,
+  \`${baseUrl}/api/v1/tags?userId=username\`,
   {
     headers: {
       'Accept': 'application/json',
@@ -118,7 +117,7 @@ const data = await response.json();`}</code>
                   400
                 </td>
                 <td className="border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-zinc-700 dark:text-zinc-300">
-                  URL parameter is required
+                  userId parameter is required
                 </td>
               </tr>
               <tr>

@@ -55,14 +55,13 @@ export default function SeriesPage() {
             <tbody>
               <tr>
                 <td className="border border-zinc-300 dark:border-zinc-700 px-4 py-2 font-mono text-sm text-zinc-700 dark:text-zinc-300">
-                  url
+                  userId
                 </td>
                 <td className="border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-zinc-700 dark:text-zinc-300">
                   string
                 </td>
                 <td className="border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-zinc-700 dark:text-zinc-300">
-                  <strong>Required.</strong> 스크래핑할 Velog 시리즈의 URL
-                  (velog.io와 series가 포함되어야 함)
+                  <strong>Required.</strong> 스크래핑할 Velog 사용자 ID
                 </td>
               </tr>
             </tbody>
@@ -100,9 +99,9 @@ export default function SeriesPage() {
               seriesCodeTab === "curl"
                 ? `curl -L \\
   -H "Accept: application/json" \\
-  "${baseUrl}/api/v1/series?url=https://velog.io/@username/series/series-name"`
+  "${baseUrl}/api/v1/series?userId=username"`
                 : `const response = await fetch(
-  \`${baseUrl}/api/v1/series?url=\${encodeURIComponent('https://velog.io/@username/series/series-name')}\`,
+  \`${baseUrl}/api/v1/series?userId=username\`,
   {
     headers: {
       'Accept': 'application/json',
@@ -118,12 +117,12 @@ const data = await response.json();`
               <pre className="text-zinc-100 text-sm font-mono">
                 <code>{`curl -L \\
   -H "Accept: application/json" \\
-  "${baseUrl}/api/v1/series?url=https://velog.io/@username/series/series-name"`}</code>
+  "${baseUrl}/api/v1/series?userId=username"`}</code>
               </pre>
             ) : (
               <pre className="text-zinc-100 text-sm font-mono">
                 <code>{`const response = await fetch(
-  \`${baseUrl}/api/v1/series?url=\${encodeURIComponent('https://velog.io/@username/series/series-name')}\`,
+  \`${baseUrl}/api/v1/series?userId=username\`,
   {
     headers: {
       'Accept': 'application/json',
@@ -166,7 +165,7 @@ const data = await response.json();`}</code>
                   400
                 </td>
                 <td className="border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-zinc-700 dark:text-zinc-300">
-                  URL parameter is required 또는 Not a Velog Series URL
+                  userId parameter is required
                 </td>
               </tr>
               <tr>
