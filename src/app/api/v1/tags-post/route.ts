@@ -54,8 +54,84 @@ export async function GET(request: NextRequest) {
     });
 
     const page = await browser.newPage();
-    const url = `https://velog.io/@${userId}/posts?tag=${tag}`;
-    await page.goto(url, { waitUntil: "networkidle2" });
+
+    const postsUrl = `https://velog.io/@${userId}/posts`;
+
+    await page.goto(postsUrl, { waitUntil: "networkidle2" });
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const navigationSuccess = await page.evaluate((tagName) => {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set("tag", tagName);
+
+        const windowWithNext = window as unknown as {
+          next?: {
+            router?: {
+              push: (
+                url: string,
+                as?: string,
+                options?: { shallow?: boolean },
+              ) => void;
+            };
+          };
+        };
+
+        if (windowWithNext.next?.router) {
+          windowWithNext.next.router.push(
+            url.pathname + url.search,
+            undefined,
+            { shallow: true },
+          );
+          return true;
+        }
+
+        window.history.pushState({}, "", url.toString());
+
+        window.dispatchEvent(new PopStateEvent("popstate"));
+
+        return true;
+      } catch {
+        return false;
+      }
+    }, tag);
+
+    if (!navigationSuccess) {
+      await browser.close();
+      return new Response(
+        JSON.stringify({ error: "Failed to navigate with tag parameter" }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        },
+      );
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const currentUrl = page.url();
+    const urlObj = new URL(currentUrl);
+    const currentTag = urlObj.searchParams.get("tag");
+
+    const isRedirectedBack =
+      !currentTag && (currentUrl === postsUrl || currentUrl === `${postsUrl}/`);
+
+    if (isRedirectedBack) {
+      await browser.close();
+      return new Response(
+        JSON.stringify({ error: "Tag not found or invalid" }),
+        {
+          status: 404,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        },
+      );
+    }
 
     await page
       .waitForSelector(

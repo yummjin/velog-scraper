@@ -115,6 +115,13 @@ export default function Sidebar() {
             >
               태그 스크래핑
             </SidebarLink>
+            <SidebarLink
+              href="/document/tags-post"
+              isActive={pathname === "/document/tags-post"}
+              onClick={closeMobileMenu}
+            >
+              태그별 게시글 스크래핑
+            </SidebarLink>
           </nav>
         </div>
       </aside>
