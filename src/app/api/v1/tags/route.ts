@@ -1,4 +1,4 @@
-import type { Tag } from "@/app/types";
+import type { Tag } from "@/types";
 import axios from "axios";
 import { NextRequest } from "next/server";
 

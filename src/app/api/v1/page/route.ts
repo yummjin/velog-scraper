@@ -1,4 +1,4 @@
-import type { Post } from "@/app/types";
+import type { Post } from "@/types";
 import { cleanElement } from "@/utils/cleanElement";
 import axios from "axios";
 import * as cheerio from "cheerio";

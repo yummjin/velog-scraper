@@ -1,6 +1,6 @@
 "use server";
 
-import type { Series } from "../app/types/series";
+import type { Series } from "../types/series";
 
 export async function fetchSeries(data: FormData): Promise<Series> {
   const baseUrl = "https://velog-scraper.vercel.app/api/v1";

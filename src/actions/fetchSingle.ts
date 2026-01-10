@@ -1,6 +1,6 @@
 "use server";
 
-import type { Post } from "../app/types/post";
+import type { Post } from "../types/post";
 
 export async function fetchSingle(data: FormData): Promise<Post> {
   const baseUrl = "https://velog-scraper.vercel.app/api/v1";
