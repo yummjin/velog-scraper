@@ -20,11 +20,11 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const url = searchParams.get("url");
+  const userId = searchParams.get("userId");
 
-  if (!url) {
+  if (!userId) {
     return new Response(
-      JSON.stringify({ error: "URL parameter is required" }),
+      JSON.stringify({ error: "userId parameter is required" }),
       {
         status: 400,
         headers: {
@@ -35,18 +35,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  if (!url.includes("velog.io") || !url.includes("series")) {
-    return new Response(JSON.stringify({ error: "Not a Velog Series URL" }), {
-      status: 400,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
-    });
-  }
-
   try {
-    const html = await axios.get(decodeURIComponent(url));
+    const html = await axios.get(`https://velog.io/@${userId}/series`);
     const $ = cheerio.load(html.data);
 
     const title = $("title").text().split(" | ")[1];

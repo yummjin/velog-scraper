@@ -17,11 +17,11 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const url = searchParams.get("url");
+  const userId = searchParams.get("userId");
 
-  if (!url) {
+  if (!userId) {
     return new Response(
-      JSON.stringify({ error: "URL parameter is required" }),
+      JSON.stringify({ error: "userId parameter is required" }),
       {
         status: 400,
         headers: {
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const html = await axios.get(decodeURIComponent(url));
+    const html = await axios.get(`https://velog.io/@${userId}`);
 
     const htmlString = html.data.toString();
     let userTagsSection = "";
@@ -82,4 +82,3 @@ export async function GET(request: NextRequest) {
     });
   }
 }
-
