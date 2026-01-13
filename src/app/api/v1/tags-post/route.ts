@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Post } from "@/types";
 import * as cheerio from "cheerio";
 import { NextRequest } from "next/server";
@@ -68,20 +69,14 @@ export async function GET(request: NextRequest) {
       // Vercel 환경: puppeteer-core + chromium 사용
       const chromium = require("@sparticuz/chromium");
 
+      // Chromium 실행 경로 가져오기
+      const executablePath = await chromium.executablePath();
+
       browser = await puppeteer.launch({
-        args: [
-          ...chromium.args,
-          "--hide-scrollbars",
-          "--disable-web-security",
-          "--disable-features=IsolateOrigins,site-per-process",
-        ],
-        defaultViewport: chromium.defaultViewport || {
-          width: 1920,
-          height: 1080,
-        },
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless ?? true,
-        ignoreHTTPSErrors: true,
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: executablePath,
+        headless: chromium.headless,
       });
     } else {
       // 로컬 개발 환경: 일반 puppeteer 사용
