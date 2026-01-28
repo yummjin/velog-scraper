@@ -122,6 +122,13 @@ export default function Sidebar() {
             >
               태그별 게시글 스크래핑
             </SidebarLink>
+            <SidebarLink
+              href="/document/post-all"
+              isActive={pathname === "/document/post-all"}
+              onClick={closeMobileMenu}
+            >
+              전체 게시글 스크래핑
+            </SidebarLink>
           </nav>
         </div>
       </aside>
